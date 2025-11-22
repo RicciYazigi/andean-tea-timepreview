@@ -1,109 +1,1790 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andean Tea Time — Espíritu · Mente · Corazón · Piedra</title>
-<style>
-    .hero-image {
-      width: 100%;
-      height: auto;
-    }
-    .kit-image {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 10px 0;
-    }
-    header {
-      background-color: #fff;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .logo {
-      font-weight: bold;
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: #333;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-    nav a {
-      text-decoration: none;
-      color: #555;
-    }
-    .hamburger {
-      display: none;
-      cursor: pointer;
-    }
-    .bar {
-      display: block;
-      width: 25px;
-      height: 3px;
-      margin: 5px auto;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      background-color: #333;
-    }
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #fff;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 1rem 0;
-        box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
-      }
-      nav ul.active {
-        display: flex;
-      }
-      .hamburger {
-        display: block;
-      }
-    }
-</style>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andean Tea Time — RegálaTé un momento sagrado | Especies del Páramo</title>
+    <meta name="description" content="Kits artesanales de infusiones del páramo andino. Frascos de vidrio reutilizables con especies puras. Tú pones la intención, nosotros el ritual.">
+    <meta name="keywords" content="té, infusiones, páramo, Ecuador, ritual, andino, natural, artesanal, kit, regalo, sostenible">
+    <meta name="author" content="Andean Tea Time">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Andean Tea Time — RegálaTé un momento sagrado">
+    <meta property="og:description" content="Especies puras del páramo. Tú pones la intención.">
+    <meta property="og:image" content="https://page.gensparksite.com/v1/base64_upload/08502b059014802a7940a5e78648b253">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Andean Tea Time">
+    <meta property="twitter:description" content="RegálaTé un momento sagrado con nuestros kits de infusiones del páramo">
+    <meta property="twitter:image" content="https://page.gensparksite.com/v1/base64_upload/08502b059014802a7940a5e78648b253">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verde-andino: #2D6A4F;
+            --kraft-natural: #D1B38A;
+            --marfil-claro: #FAF8F4;
+            --carbon-oscuro: #2B2B2B;
+            --verde-suave: rgba(45, 106, 79, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* CUSTOM CURSOR EFFECTS */
+        a, button, .kit-card, .step-card, .especie-card, .receta-card {
+            cursor: pointer;
+        }
+
+        a:hover, button:hover {
+            cursor: pointer;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--marfil-claro);
+            color: var(--carbon-oscuro);
+            overflow-x: hidden;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease forwards;
+        }
+
+        @keyframes fadeInBody {
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 248, 244, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--carbon-oscuro);
+            letter-spacing: 1px;
+        }
+
+        .logo .te {
+            color: var(--verde-andino);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--carbon-oscuro);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-andino);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--verde-andino);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* MOBILE MENU HAMBURGER */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--carbon-oscuro);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(250, 248, 244, 0.98);
+                backdrop-filter: blur(20px);
+                width: 250px;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(45, 106, 79, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            color: var(--carbon-oscuro);
+            line-height: 1.2;
+        }
+
+        .hero .te-highlight {
+            color: var(--verde-andino);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(43, 43, 43, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--verde-andino);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(45, 106, 79, 0.5);
+            background: #236047;
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: white;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* FLOATING LEAVES ANIMATION */
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+            filter: blur(1px);
+            pointer-events: none;
+        }
+
+        .leaf:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; animation-duration: 18s; }
+        .leaf:nth-child(2) { top: 20%; right: 15%; animation-delay: 3s; animation-duration: 22s; }
+        .leaf:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 6s; animation-duration: 20s; }
+        .leaf:nth-child(4) { bottom: 30%; right: 10%; animation-delay: 9s; animation-duration: 24s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) translateX(0); }
+            25% { transform: translateY(-20px) rotate(90deg) translateX(10px); }
+            50% { transform: translateY(-40px) rotate(180deg) translateX(0); }
+            75% { transform: translateY(-20px) rotate(270deg) translateX(-10px); }
+            100% { transform: translateY(0) rotate(360deg) translateX(0); }
+        }
+
+        /* SECTION COMMON STYLES */
+        section {
+            min-height: 100vh;
+            padding: 8rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--verde-andino) 50%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--carbon-oscuro);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(43, 43, 43, 0.7);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* COMO FUNCIONA SECTION */
+        .como-funciona {
+            background: white;
+            position: relative;
+        }
+
+        .como-funciona::after {
+            content: '🌿';
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            font-size: 8rem;
+            opacity: 0.03;
+            pointer-events: none;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--marfil-claro);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--verde-suave) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(45, 106, 79, 0.2);
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.2) rotate(5deg);
+            opacity: 0.5;
+        }
+
+        .step-number {
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--verde-andino);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--carbon-oscuro);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card p {
+            color: rgba(43, 43, 43, 0.7);
+            line-height: 1.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* KITS SECTION */
+        .kits-section {
+            background: var(--marfil-claro);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kits-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(45, 106, 79, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .kits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .kit-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .kit-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(45, 106, 79, 0.25);
+        }
+
+        .kit-card:hover .kit-image {
+            transform: scale(1.05);
+        }
+
+        .kit-image {
+            transition: transform 0.6s ease;
+        }
+
+        .kit-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kit-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        .kit-content {
+            padding: 2rem;
+        }
+
+        .kit-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--carbon-oscuro);
+        }
+
+        .kit-price {
+            font-size: 2rem;
+            color: var(--verde-andino);
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .kit-description {
+            color: rgba(43, 43, 43, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .kit-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .kit-features li {
+            padding: 0.5rem 0;
+            color: rgba(43, 43, 43, 0.7);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .kit-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--verde-andino);
+            font-weight: bold;
+        }
+
+        .kit-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--verde-andino);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .kit-button:hover {
+            background: #236047;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(45, 106, 79, 0.3);
+        }
+
+        .kit-button:active {
+            transform: scale(1.02);
+        }
+
+        /* ESPECIES SECTION */
+        .especies-section {
+            background: white;
+            position: relative;
+        }
+
+        .especies-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(209, 179, 138, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .especies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .especie-card {
+            background: var(--marfil-claro);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .especie-card:hover {
+            border-color: var(--verde-andino);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(45, 106, 79, 0.2);
+        }
+
+        .especie-card:hover .especie-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .especie-icon {
+            transition: all 0.4s ease;
+        }
+
+        .especie-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .especie-card h4 {
+            font-size: 1.3rem;
+            color: var(--carbon-oscuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .especie-latin {
+            font-style: italic;
+            color: var(--verde-andino);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .especie-card p {
+            color: rgba(43, 43, 43, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* RECETAS SECTION */
+        .recetas-section {
+            background: linear-gradient(135deg, rgba(209, 179, 138, 0.1) 0%, rgba(45, 106, 79, 0.05) 100%);
+        }
+
+        .recetas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .receta-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .receta-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(45, 106, 79, 0.25);
+        }
+
+        .receta-card:hover .receta-header {
+            background: linear-gradient(135deg, #236047 0%, #1a3d2e 100%);
+        }
+
+        .receta-header {
+            transition: all 0.4s ease;
+        }
+
+        .receta-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--verde-andino) 0%, #1d4d37 100%);
+            color: white;
+        }
+
+        .receta-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .receta-intention {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .receta-body {
+            padding: 2rem;
+        }
+
+        .receta-ingredientes {
+            margin-bottom: 1.5rem;
+        }
+
+        .receta-ingredientes h4 {
+            color: var(--verde-andino);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .receta-ingredientes ul {
+            list-style: none;
+        }
+
+        .receta-ingredientes li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: rgba(43, 43, 43, 0.8);
+        }
+
+        .receta-ingredientes li::before {
+            content: '🌿';
+            position: absolute;
+            left: 0;
+        }
+
+        /* LEYENDA SECTION */
+        .leyenda-section {
+            background: var(--carbon-oscuro);
+            color: var(--marfil-claro);
+            min-height: 80vh;
+        }
+
+        .leyenda-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .leyenda-section .section-title {
+            color: var(--marfil-claro);
+        }
+
+        .leyenda-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            font-style: italic;
+            color: rgba(250, 248, 244, 0.9);
+            margin: 2rem 0;
+        }
+
+        .leyenda-text .highlight {
+            color: var(--kraft-natural);
+            font-weight: 500;
+        }
+
+        /* REFILL SECTION */
+        .refill-section {
+            background: white;
+        }
+
+        .refill-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .refill-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--verde-andino);
+        }
+
+        .refill-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(43, 43, 43, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .refill-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .refill-features li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .refill-features li::before {
+            content: '♻️';
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
+        }
+
+        .refill-visual {
+            background: linear-gradient(135deg, var(--verde-suave) 0%, var(--marfil-claro) 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .refill-visual .price-tag {
+            font-size: 3rem;
+            color: var(--verde-andino);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .refill-visual p {
+            font-size: 1.2rem;
+            color: var(--carbon-oscuro);
+        }
+
+        /* IMPACTO SECTION */
+        .impacto-section {
+            background: var(--verde-andino);
+            color: white;
+            min-height: 60vh;
+        }
+
+        .impacto-section .section-title {
+            color: white;
+        }
+
+        .impacto-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .impacto-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.08) translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover .stat-number {
+            transform: scale(1.15);
+        }
+
+        .stat-number {
+            transition: all 0.4s ease;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--kraft-natural);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--carbon-oscuro);
+            color: var(--marfil-claro);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--marfil-claro);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--kraft-natural);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(250, 248, 244, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--verde-andino);
+            transform: translateY(-5px) rotate(5deg) scale(1.1);
+        }
+
+        .social-links a:active {
+            transform: translateY(-3px) rotate(0deg) scale(1.05);
+        }
+
+        .disclaimer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(250, 248, 244, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* IMAGE LAZY LOAD EFFECT */
+        img {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+        }
+
+        /* SELECTION COLOR */
+        ::selection {
+            background: var(--verde-andino);
+            color: white;
+        }
+
+        ::-moz-selection {
+            background: var(--verde-andino);
+            color: white;
+        }
+
+        /* SCROLLBAR CUSTOM */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--marfil-claro);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--verde-andino);
+            border-radius: 10px;
+            border: 3px solid var(--marfil-claro);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #236047;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .steps-grid,
+            .kits-grid,
+            .especies-grid,
+            .recetas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .refill-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            section[style*="grid-template-columns: 1fr 1fr"] > div > div {
+                grid-template-columns: 1fr !important;
+            }
+
+            .hero {
+                height: 100vh;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+
+            .hero h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* ACCESSIBILITY IMPROVEMENTS */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* SMOOTH REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* STAGGERED REVEAL ANIMATIONS */
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+    </style>
 </head>
 <body>
-<header>
-  <nav>
-    <a href="/" class="logo">Andean Tea Time</a>
-    <ul>
-      <li><a href="#kits">Kits</a></li>
-      <li><a href="#ritual">Ritual</a></li>
-      <li><a href="#contact">Contacto</a></li>
-    </ul>
-    <div class="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scroll-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--verde-andino) 0%, var(--kraft-natural) 100%); z-index: 10000; transition: width 0.1s ease;"></div>
+    <!-- LOADING SPLASH -->
+    <div id="loading-splash" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--marfil-claro); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
+        <div style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--carbon-oscuro); margin-bottom: 1rem; animation: pulse 2s ease infinite;">ANDEAN <span style="color: var(--verde-andino); font-style: italic;">TEA</span> TIME</div>
+        <div style="font-size: 1rem; color: rgba(43,43,43,0.6); letter-spacing: 2px;">Cargando tu momento sagrado...</div>
+        <div style="margin-top: 2rem; width: 200px; height: 3px; background: rgba(45,106,79,0.2); border-radius: 10px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: var(--verde-andino); animation: loading 1.5s ease infinite;"></div>
+        </div>
     </div>
-  </nav>
-</header>
-<section class="hero"><img src="assets/hero.jpg" class="hero-image" alt="Infusión andina servida en una taza de cerámica"></section>
-<section id="kits">
-<div><img src="assets/kit1.jpg" class="kit-image" alt="Kit de té andino con caja y accesorios"></div>
-<div><img src="assets/kit2.jpg" class="kit-image" alt="Otro kit de té andino con diferentes hierbas"></div>
-<div><img src="assets/ritual1.jpg" class="kit-image" alt="Persona realizando un ritual de té"></div>
-<div><img src="assets/infuser.jpg" class="kit-image" alt="Infusor de té de acero inoxidable"></div>
-</section>
-<script>
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector("nav ul");
 
-    hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-    });
-</script>
-</body></html>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                ANDEAN <span class="te">TEA</span> TIME
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#kits" onclick="closeMenu()">Kits</a></li>
+                <li><a href="#especies" onclick="closeMenu()">Especies</a></li>
+                <li><a href="#recetas" onclick="closeMenu()">Rituales</a></li>
+                <li><a href="#leyenda" onclick="closeMenu()">Historia</a></li>
+                <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://page.gensparksite.com/v1/base64_upload/08502b059014802a7940a5e78648b253') center/cover no-repeat; position: relative;">
+        <!-- ANIMATED VAPOR EFFECT -->
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to top, rgba(250,248,244,0.8) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+
+        <div class="hero-content">
+            <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">Regála<span class="te-highlight" style="color: #D1B38A;">Té</span><br>un momento sagrado</h1>
+            <p class="hero-subtitle" style="color: rgba(255,255,255,0.95); text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">Especies puras del páramo. Tú pones la intención.</p>
+            <a href="#kits" class="cta-button">Descubre los Kits</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como-funciona">
+        <div class="section-container">
+            <h2 class="section-title reveal">¿Cómo funciona?</h2>
+            <p class="section-subtitle reveal">Cuatro pasos para tu ritual andino</p>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">01</div>
+                    <h3>Elige tu Kit</h3>
+                    <p>Selecciona entre 4, 6 u 8 especies del páramo. Cada frasco es una intención esperando ser activada.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">02</div>
+                    <h3>Escanea el QR</h3>
+                    <p>Accede a recetas, rituales, playlists y la bitácora de origen de cada hierba. Conecta con su historia.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">03</div>
+                    <h3>Prepara tu Ritual</h3>
+                    <p>Agua caliente, tu infusor, un momento de silencio. Observa cómo el vapor lleva tu intención al universo.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">04</div>
+                    <h3>Comparte y Refill</h3>
+                    <p>Regala un momento sagrado. Cuando tus frascos vacíen, rellénalos. El ritual es circular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KITS SECTION -->
+    <section id="kits" class="kits-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Nuestros Kits</h2>
+            <p class="section-subtitle reveal">Cada kit es un puente entre la tierra y tu intención</p>
+
+            <div class="kits-grid">
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://page.gensparksite.com/v1/base64_upload/b2569d0149b105faa34eca32e74f4ddb');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 4 Especies</h3>
+                        <div class="kit-price">$18</div>
+                        <p class="kit-description">Perfecto para iniciarte en el ritual andino. Cuatro especies esenciales del páramo.</p>
+                        <ul class="kit-features">
+                            <li>4 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita de madera artesanal</li>
+                            <li>Tarjeta con QR de rituales</li>
+                            <li>Etiquetas en papel reciclado</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%204%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://page.gensparksite.com/v1/base64_upload/4f25b271e0a19b101cdd70f3af02ba21');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 6 Especies</h3>
+                        <div class="kit-price">$26</div>
+                        <p class="kit-description">Amplía tu práctica ritual. Seis intenciones, seis momentos sagrados.</p>
+                        <ul class="kit-features">
+                            <li>6 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita de madera con gradita</li>
+                            <li>Tarjeta con QR de rituales</li>
+                            <li>Guía de preparación impresa</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%206%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://page.gensparksite.com/v1/base64_upload/7c1aa18bc8882424997b300fce003208');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 8 Especies</h3>
+                        <div class="kit-price">$34</div>
+                        <p class="kit-description">La experiencia completa. Ocho especies para cada día de la semana y el descanso sagrado.</p>
+                        <ul class="kit-features">
+                            <li>8 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita premium de madera doble</li>
+                            <li>Tarjeta QR + calendario ritual</li>
+                            <li>Mensaje personalizado incluido</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%208%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section style="min-height: 80vh; padding: 6rem 5%; background: var(--marfil-claro); display: flex; align-items: center;">
+        <div class="section-container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div class="reveal" style="position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); transition: all 0.5s ease;" onmouseover="this.style.transform='scale(1.03) rotate(1deg)'; this.style.boxShadow='0 30px 80px rgba(45,106,79,0.3)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 20px 60px rgba(0,0,0,0.15)'">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/a6903a905e938c093f31d2726b9ea453" alt="Andean Tea Time - Kit en bandeja" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div class="reveal" style="padding: 2rem;">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--carbon-oscuro); margin-bottom: 1.5rem;">Diseño Natural, <br><span style="color: var(--verde-andino);">Intención Sagrada</span></h2>
+                    <p style="font-size: 1.2rem; line-height: 1.8; color: rgba(43,43,43,0.8); margin-bottom: 1rem;">Cada frasco está pensado para durar años. El vidrio transparente te permite ver las hierbas, el corcho natural preserva su aroma, y las etiquetas de papel reciclado cuentan la historia de cada especie.</p>
+                    <p style="font-size: 1.2rem; line-height: 1.8; color: rgba(43,43,43,0.8); margin-bottom: 2rem;">La jabita de madera con diseño de gradita te permite exhibir tus especies como un altar personal. Minimalista, funcional, eterno.</p>
+                    <a href="#kits" style="display: inline-block; padding: 1rem 2rem; background: var(--verde-andino); color: white; text-decoration: none; border-radius: 50px; font-weight: 500; transition: all 0.3s ease;">Ver Kits Completos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPECIES DEL PARAMO -->
+    <section id="especies" class="especies-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Especies del Páramo</h2>
+            <p class="section-subtitle reveal">Plantas ancestrales que respiran a 3000 metros de altura</p>
+
+            <div class="especies-grid">
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌼</div>
+                    <h4>Manzanilla</h4>
+                    <p class="especie-latin">Matricaria chamomilla</p>
+                    <p>Calma el sistema nervioso, facilita la digestión y promueve el sueño reparador. Usada ancestralmente para aliviar el estrés.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🍋</div>
+                    <h4>Cedrón</h4>
+                    <p class="especie-latin">Aloysia citrodora</p>
+                    <p>Aromático y digestivo, alivia dolores estomacales y reduce la ansiedad. Su aroma cítrico eleva el ánimo.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌿</div>
+                    <h4>Toronjil</h4>
+                    <p class="especie-latin">Melissa officinalis</p>
+                    <p>Sedante natural que reduce el estrés y mejora la concentración. Ideal para momentos de introspección.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌱</div>
+                    <h4>Hierba Luisa</h4>
+                    <p class="especie-latin">Cymbopogon citratus</p>
+                    <p>Refrescante y digestiva, ayuda a la relajación muscular y mejora el estado de ánimo con su esencia luminosa.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">💚</div>
+                    <h4>Menta</h4>
+                    <p class="especie-latin">Mentha piperita</p>
+                    <p>Estimulante natural que despeja la mente, alivia dolores de cabeza y facilita la respiración profunda.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌸</div>
+                    <h4>Lavanda</h4>
+                    <p class="especie-latin">Lavandula angustifolia</p>
+                    <p>Aromática y relajante, reduce la ansiedad, favorece el sueño y equilibra las emociones intensas.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🍃</div>
+                    <h4>Eucalipto</h4>
+                    <p class="especie-latin">Eucalyptus globulus</p>
+                    <p>Expectorante natural, despeja las vías respiratorias y fortalece el sistema inmunológico. Purificador del aire.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌾</div>
+                    <h4>Romero</h4>
+                    <p class="especie-latin">Rosmarinus officinalis</p>
+                    <p>Estimula la memoria y la claridad mental. Usado ancestralmente para rituales de protección y renovación.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌺</div>
+                    <h4>Rosa Mosqueta</h4>
+                    <p class="especie-latin">Rosa rubiginosa</p>
+                    <p>Rica en antioxidantes, fortalece el sistema inmune y aporta una sensación de calidez y bienestar profundo.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🫖</div>
+                    <h4>Jengibre</h4>
+                    <p class="especie-latin">Zingiber officinale</p>
+                    <p>Calienta el cuerpo, estimula la circulación y activa la energía vital. Perfecto para mañanas frías del páramo.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🌼</div>
+                    <h4>Caléndula</h4>
+                    <p class="especie-latin">Calendula officinalis</p>
+                    <p>Antiinflamatoria y reparadora, fortalece el sistema inmune y aporta luz solar a días nublados del alma.</p>
+                </div>
+
+                <div class="especie-card reveal">
+                    <div class="especie-icon">🍂</div>
+                    <h4>Ruda</h4>
+                    <p class="especie-latin">Ruta graveolens</p>
+                    <p>Planta de protección ancestral, usada en rituales de limpieza energética y fortalecimiento del espíritu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECETAS Y RITUALES -->
+    <section id="recetas" class="recetas-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Rituales & Recetas</h2>
+            <p class="section-subtitle reveal">Cada mezcla es una intención, cada sorbo un acto sagrado</p>
+
+            <div class="recetas-grid">
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Respira Alto</h3>
+                        <p class="receta-intention">Para calmar y respirar profundo</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Eucalipto (1 cda.)</li>
+                                <li>Menta (1/2 cda.)</li>
+                                <li>Lavanda (pizca)</li>
+                            </ul>
+                        </div>
+                        <p>Prepara con agua a 90°C. Deja reposar 5 minutos. Inhala profundo tres veces antes de beber. Cierra los ojos.</p>
+                    </div>
+                </div>
+
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Sueño de Altura</h3>
+                        <p class="receta-intention">Para descansar como el páramo en la noche</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Manzanilla (1 cda.)</li>
+                                <li>Toronjil (1 cda.)</li>
+                                <li>Lavanda (1/2 cda.)</li>
+                            </ul>
+                        </div>
+                        <p>Prepara 30 minutos antes de dormir. Agua a 85°C, reposo de 7 minutos. Bebe lentamente, en silencio, con gratitud.</p>
+                    </div>
+                </div>
+
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Digestivo Andino</h3>
+                        <p class="receta-intention">Para honrar la comida y facilitar la digestión</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Cedrón (1 cda.)</li>
+                                <li>Hierba Luisa (1 cda.)</li>
+                                <li>Jengibre (rodaja pequeña)</li>
+                            </ul>
+                        </div>
+                        <p>Ideal después de las comidas. Agua hirviendo, reposo de 5 minutos. El calor del jengibre despierta el fuego digestivo.</p>
+                    </div>
+                </div>
+
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Vitalidad</h3>
+                        <p class="receta-intention">Para activar el cuerpo y clarificar la mente</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Romero (1 cda.)</li>
+                                <li>Menta (1 cda.)</li>
+                                <li>Jengibre (rodaja)</li>
+                            </ul>
+                        </div>
+                        <p>Perfecto para las mañanas. Agua a 95°C, reposo de 4 minutos. Bebe observando el amanecer si es posible.</p>
+                    </div>
+                </div>
+
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Amanecer Claro</h3>
+                        <p class="receta-intention">Para iniciar el día con claridad</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Hierba Luisa (1 cda.)</li>
+                                <li>Menta (1/2 cda.)</li>
+                                <li>Rosa Mosqueta (pizca)</li>
+                            </ul>
+                        </div>
+                        <p>Ritual de inicio. Agua a 90°C, reposo de 6 minutos. Escribe tu intención del día mientras el té reposa.</p>
+                    </div>
+                </div>
+
+                <div class="receta-card reveal">
+                    <div class="receta-header">
+                        <h3>Bruma Dorada</h3>
+                        <p class="receta-intention">Para momentos de introspección profunda</p>
+                    </div>
+                    <div class="receta-body">
+                        <div class="receta-ingredientes">
+                            <h4>Especies</h4>
+                            <ul>
+                                <li>Manzanilla (1 cda.)</li>
+                                <li>Caléndula (1/2 cda.)</li>
+                                <li>Lavanda (pizca)</li>
+                            </ul>
+                        </div>
+                        <p>Para la tarde. Agua a 85°C, reposo de 8 minutos. Observa cómo el líquido adquiere un tono dorado, como la luz del páramo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEYENDA ANCESTRAL -->
+    <section id="leyenda" class="leyenda-section">
+        <div class="section-container">
+            <div class="leyenda-content reveal">
+                <h2 class="section-title">La Leyenda Ancestral</h2>
+
+                <p class="leyenda-text">
+                    Cuentan los abuelos que <span class="highlight">cuando el páramo respira</span>, las plantas guardan secretos del viento.
+                </p>
+
+                <p class="leyenda-text">
+                    Que cada hoja seca <span class="highlight">es una memoria del fuego sagrado</span>, y que el agua caliente no hierve solo hierba — <span class="highlight">hierve tiempo, intención, propósito.</span>
+                </p>
+
+                <p class="leyenda-text">
+                    En la altura, donde el aire es delgado y el silencio profundo, <span class="highlight">las mujeres sabias recogían las plantas con las manos descalzas</span>, sintiendo la energía de la Pachamama subir por sus venas.
+                </p>
+
+                <p class="leyenda-text">
+                    No era solo un té. <span class="highlight">Era una ofrenda, una pregunta al universo, una forma de detener el tiempo</span> y regalarse un momento sagrado.
+                </p>
+
+                <p class="leyenda-text">
+                    Andean Tea Time no es una marca. <span class="highlight">Es el eco de ese ritual milenario</span>, traído a tu mesa, a tu taza, a tu respiración.
+                </p>
+
+                <p class="leyenda-text">
+                    <span class="highlight">Tú pones la intención.</span><br>
+                    El páramo pone su esencia.<br>
+                    Nosotros, el puente.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RITUAL VISUAL SECTION -->
+    <section style="min-height: 70vh; background: url('https://page.gensparksite.com/v1/base64_upload/90cf77f018c3b6cae8e4229496168164') center/cover no-repeat; position: relative; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(45, 106, 79, 0.85) 0%, rgba(43, 43, 43, 0.75) 100%);"></div>
+        <div style="position: relative; z-index: 2; text-align: center; color: white; padding: 3rem; max-width: 800px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 2rem; color: white;">El ritual comienza <br>con la <span style="color: var(--kraft-natural); font-style: italic;">intención</span></h2>
+            <p style="font-size: 1.3rem; line-height: 2; opacity: 0.95; margin-bottom: 2rem;">Antes de preparar tu infusión, cierra los ojos. Respira profundo. Pregunta a tu cuerpo qué necesita hoy: calma, energía, claridad, descanso. Las especies responderán.</p>
+            <a href="#recetas" style="display: inline-block; padding: 1.2rem 3rem; background: white; color: var(--verde-andino); text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">Descubre los Rituales</a>
+        </div>
+    </section>
+
+    <!-- REFILL & CIRCULARIDAD -->
+    <section class="refill-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Sistema Refill</h2>
+            <p class="section-subtitle reveal">El ritual es circular, como la vida en el páramo</p>
+
+            <div class="refill-content">
+                <div class="refill-info reveal">
+                    <h3>♻️ Reutiliza, Rellena, Renueva</h3>
+                    <p>Cuando tus frascos vacíen, no los deseches. El vidrio tiene memoria. El corcho guarda el aroma. Rellena y continúa tu ritual.</p>
+
+                    <ul class="refill-features">
+                        <li>Frascos de vidrio diseñados para durar años</li>
+                        <li>Tapones de corcho natural reutilizables</li>
+                        <li>Sistema de refill por especie o personalizado</li>
+                        <li>Ahorra dinero y cuida el planeta</li>
+                        <li>Jabita reutilizable para regalar nuevamente</li>
+                    </ul>
+
+                    <p><strong>¿Cómo funciona?</strong></p>
+                    <p>Escríbenos por WhatsApp indicando qué especies deseas rellenar. Te enviamos solo las hierbas en empaque compostable. Rellenas tus frascos y continúas el ritual.</p>
+
+                    <a href="https://wa.me/593999999999?text=Hola! Quiero%20hacer%20un%20refill" class="cta-button" style="margin-top: 2rem;">Solicitar Refill</a>
+                </div>
+
+                <div class="refill-visual reveal">
+                    <div class="price-tag">$4.50</div>
+                    <p>por frasco de refill</p>
+                    <p style="margin-top: 2rem; opacity: 0.8;">🌱 Empaque compostable<br>♻️ Cero desperdicio<br>🌍 Ciclo infinito</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACTO / MINGA VERDE -->
+    <section class="impacto-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Minga Verde</h2>
+            <p class="section-subtitle reveal">Cada compra es un acto de regeneración</p>
+
+            <div class="impacto-stats">
+                <div class="stat-card reveal">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Árbol nativo sembrado cada 10 kits vendidos</div>
+                </div>
+
+                <div class="stat-card reveal">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Plástico en nuestro packaging</div>
+                </div>
+
+                <div class="stat-card reveal">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Materiales naturales y biodegradables</div>
+                </div>
+
+                <div class="stat-card reveal">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Ciclos de reutilización de tus frascos</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; font-size: 1.2rem; opacity: 0.9;" class="reveal">
+                No solo vendemos té. <strong>Regeneramos el páramo, una infusión a la vez.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/593999999999?text=Hola! Me%20interesa%20Andean%20Tea%20Time"
+       id="whatsapp-float"
+       style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); z-index: 999; transition: all 0.3s ease; text-decoration: none; font-size: 2rem;"
+       onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 6px 30px rgba(37, 211, 102, 0.6)'"
+       onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 20px rgba(37, 211, 102, 0.4)'">
+        <span style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">💬</span>
+    </a>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-logo">
+                ANDEAN <span style="color: var(--kraft-natural);">TEA</span> TIME
+            </div>
+
+            <div class="footer-links">
+                <a href="#kits">Kits</a>
+                <a href="#especies">Especies</a>
+                <a href="#recetas">Rituales</a>
+                <a href="#leyenda">Historia</a>
+                <a href="https://wa.me/593999999999">WhatsApp</a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://wa.me/593999999999" aria-label="WhatsApp">📱</a>
+                <a href="https://instagram.com/andeanteatime" aria-label="Instagram">📷</a>
+                <a href="/cdn-cgi/l/email-protection#375f585b5677565953525659435256435e5a521954585a" aria-label="Email">✉️</a>
+            </div>
+
+            <div class="disclaimer">
+                <p>Andean Tea Time · Quito, Ecuador</p>
+                <p style="margin-top: 1rem;">Las infusiones de Andean Tea Time son de uso tradicional y no constituyen medicamentos. No sustituyen el diagnóstico ni tratamiento médico. Consulta a tu profesional de salud.</p>
+                <p style="margin-top: 1rem; opacity: 0.5;">© 2024 Andean Tea Time. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // NAVBAR SCROLL EFFECT
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // REVEAL ON SCROLL ANIMATION
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+
+        // SMOOTH SCROLL FOR NAVIGATION LINKS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // PARALLAX EFFECT FOR HERO (OPTIMIZED)
+        let heroParallaxTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!heroParallaxTicking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const hero = document.querySelector('.hero-content');
+                    if (hero && scrolled < window.innerHeight) {
+                        hero.style.transform = `translateY(${scrolled * 0.4}px)`;
+                        hero.style.opacity = 1 - (scrolled / (window.innerHeight * 1.2));
+                    }
+                    heroParallaxTicking = false;
+                });
+                heroParallaxTicking = true;
+            }
+        });
+
+        // ANIMATE LEAVES
+        const leaves = document.querySelectorAll('.leaf');
+        leaves.forEach((leaf, index) => {
+            leaf.style.animationDelay = `${index * 3}s`;
+        });
+
+        // HIDE LOADING SPLASH
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('loading-splash');
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+                setTimeout(() => {
+                    splash.remove();
+                }, 500);
+            }, 1000);
+        });
+
+        // SMOOTH SCROLL OPTIMIZATION
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // MOBILE MENU TOGGLE
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.remove('active');
+        }
+
+        // CLOSE MENU ON CLICK OUTSIDE
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('nav-menu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // SCROLL PROGRESS BAR
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.pageYOffset / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // HIDE WHATSAPP BUTTON ON MOBILE WHEN SCROLLING UP
+        let lastScrollTop = 0;
+        const whatsappBtn = document.getElementById('whatsapp-float');
+
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 768) {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 300) {
+                    whatsappBtn.style.opacity = '0';
+                    whatsappBtn.style.pointerEvents = 'none';
+                } else {
+                    whatsappBtn.style.opacity = '1';
+                    whatsappBtn.style.pointerEvents = 'auto';
+                }
+                lastScrollTop = scrollTop;
+            }
+        });
+
+        console.log('🌿 Andean Tea Time — RegálaTé un momento sagrado');
+    </script>
+
+</body>
+</html>
