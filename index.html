@@ -1,25 +1,884 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andean Tea Time — Espíritu · Mente · Corazón · Piedra</title>
-<style>
-    .hero-image {
-      width: 100%;
-      height: auto;
-    }
-    .kit-image {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 10px 0;
-    }
-</style>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andean Tea Time — RegálaTé un momento sagrado | Especies del Páramo</title>
+    <meta name="description" content="Kits artesanales de infusiones del páramo andino. Frascos de vidrio reutilizables con especies puras. Tú pones la intención, nosotros el ritual.">
+    <meta name="keywords" content="té, infusiones, páramo, Ecuador, ritual, andino, natural, artesanal, kit, regalo, sostenible">
+    <meta name="author" content="Andean Tea Time">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Andean Tea Time — RegálaTé un momento sagrado">
+    <meta property="og:description" content="Especies puras del páramo. Tú pones la intención.">
+    <meta property="og:image" content="https://www.genspark.ai/api/files/s/E6LZJ3Mq">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Andean Tea Time">
+    <meta property="twitter:description" content="RegálaTé un momento sagrado con nuestros kits de infusiones del páramo">
+    <meta property="twitter:image" content="https://www.genspark.ai/api/files/s/E6LZJ3Mq">
+
+    <!-- Favicon - Logo minimalista -->
+    <link rel="icon" type="image/png" href="https://www.genspark.ai/api/files/s/ZvppFFtY">
+    <link rel="apple-touch-icon" href="https://www.genspark.ai/api/files/s/ZvppFFtY">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verde-andino: #2D6A4F;
+            --kraft-natural: #D1B38A;
+            --marfil-claro: #FAF8F4;
+            --carbon-oscuro: #2B2B2B;
+            --verde-suave: rgba(45, 106, 79, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a, button, .kit-card, .step-card, .especie-card, .receta-card {
+            cursor: pointer;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--marfil-claro);
+            color: var(--carbon-oscuro);
+            overflow-x: hidden;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease forwards;
+        }
+
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 248, 244, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--carbon-oscuro);
+            letter-spacing: 1px;
+        }
+
+        .logo-text .te {
+            color: var(--verde-andino);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--carbon-oscuro);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-andino);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--verde-andino);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--carbon-oscuro);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION WITH VIDEO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(45, 106, 79, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(250,248,244,0.8) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease;
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            animation: floatLogo 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero .te-highlight {
+            color: var(--kraft-natural);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--verde-andino);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(45, 106, 79, 0.5);
+            background: #236047;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: white;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* REST OF THE STYLES - Same as before but optimized */
+        section {
+            min-height: 100vh;
+            padding: 8rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--carbon-oscuro);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(43, 43, 43, 0.7);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* COMO FUNCIONA */
+        .como-funciona {
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--marfil-claro);
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(45, 106, 79, 0.2);
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--verde-andino);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--carbon-oscuro);
+        }
+
+        .step-card p {
+            color: rgba(43, 43, 43, 0.7);
+            line-height: 1.8;
+        }
+
+        /* KITS SECTION */
+        .kits-section {
+            background: var(--marfil-claro);
+        }
+
+        .kits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .kit-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.5s ease;
+        }
+
+        .kit-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(45, 106, 79, 0.25);
+        }
+
+        .kit-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .kit-card:hover .kit-image {
+            transform: scale(1.05);
+        }
+
+        .kit-content {
+            padding: 2rem;
+        }
+
+        .kit-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--carbon-oscuro);
+        }
+
+        .kit-price {
+            font-size: 2rem;
+            color: var(--verde-andino);
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .kit-description {
+            color: rgba(43, 43, 43, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .kit-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .kit-features li {
+            padding: 0.5rem 0;
+            color: rgba(43, 43, 43, 0.7);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .kit-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--verde-andino);
+            font-weight: bold;
+        }
+
+        .kit-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--verde-andino);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .kit-button:hover {
+            background: #236047;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(45, 106, 79, 0.3);
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(250, 248, 244, 0.98);
+                backdrop-filter: blur(20px);
+                width: 250px;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .steps-grid,
+            .kits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* SCROLL PROGRESS */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--verde-andino) 0%, var(--kraft-natural) 100%);
+            z-index: 10000;
+            transition: width 0.1s ease;
+        }
+
+        /* FLOATING WHATSAPP */
+        #whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+
+        #whatsapp-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* LOADING SPLASH */
+        #loading-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--marfil-claro);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--carbon-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(45,106,79,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .loading-bar-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--verde-andino);
+            animation: loading 1.5s ease infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
 </head>
 <body>
-<section class="hero"><img src="assets/hero.jpg" class="hero-image" alt="Infusión andina servida en una taza de cerámica"></section>
-<section id="kits">
-<div><img src="assets/kit1.jpg" class="kit-image" alt="Kit de té andino con caja y accesorios"></div>
-<div><img src="assets/kit2.jpg" class="kit-image" alt="Otro kit de té andino con diferentes hierbas"></div>
-<div><img src="assets/ritual1.jpg" class="kit-image" alt="Persona realizando un ritual de té"></div>
-<div><img src="assets/infuser.jpg" class="kit-image" alt="Infusor de té de acero inoxidable"></div>
-</section>
-</body></html>
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scroll-progress"></div>
+
+    <!-- LOADING SPLASH -->
+    <div id="loading-splash">
+        <img src="https://www.genspark.ai/api/files/s/E6LZJ3Mq" alt="Andean Tea Time" class="loading-logo">
+        <div class="loading-text">Cargando tu momento sagrado...</div>
+        <div class="loading-bar">
+            <div class="loading-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="https://www.genspark.ai/api/files/s/ZvppFFtY" alt="Andean Tea Time Logo" class="logo-icon">
+                <div class="logo-text">
+                    ANDEAN <span class="te">TEA</span> TIME
+                </div>
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#kits" onclick="closeMenu()">Kits</a></li>
+                <li><a href="#especies" onclick="closeMenu()">Especies</a></li>
+                <li><a href="#recetas" onclick="closeMenu()">Rituales</a></li>
+                <li><a href="#leyenda" onclick="closeMenu()">Historia</a></li>
+                <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION WITH VIDEO -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://www.genspark.ai/api/files/s/GWJVaSna" type="video/mp4">
+        </video>
+
+        <div class="hero-content">
+            <img src="https://www.genspark.ai/api/files/s/E6LZJ3Mq" alt="Andean Tea Time" class="hero-logo">
+            <h1>Regála<span class="te-highlight">Té</span><br>un momento sagrado</h1>
+            <p class="hero-subtitle">Especies puras del páramo. Tú pones la intención.</p>
+            <a href="#kits" class="cta-button">Descubre los Kits</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como-funciona">
+        <div class="section-container">
+            <h2 class="section-title reveal">¿Cómo funciona?</h2>
+            <p class="section-subtitle reveal">Cuatro pasos para tu ritual andino</p>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">01</div>
+                    <h3>Elige tu Kit</h3>
+                    <p>Selecciona entre 4, 6 u 8 especies del páramo. Cada frasco es una intención esperando ser activada.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">02</div>
+                    <h3>Escanea el QR</h3>
+                    <p>Accede a recetas, rituales, playlists y la bitácora de origen de cada hierba. Conecta con su historia.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">03</div>
+                    <h3>Prepara tu Ritual</h3>
+                    <p>Agua caliente, tu infusor, un momento de silencio. Observa cómo el vapor lleva tu intención al universo.</p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">04</div>
+                    <h3>Comparte y Refill</h3>
+                    <p>Regala un momento sagrado. Cuando tus frascos vacíen, rellénalos. El ritual es circular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KITS SECTION -->
+    <section id="kits" class="kits-section">
+        <div class="section-container">
+            <h2 class="section-title reveal">Nuestros Kits</h2>
+            <p class="section-subtitle reveal">Cada kit es un puente entre la tierra y tu intención</p>
+
+            <div class="kits-grid">
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://www.genspark.ai/api/files/s/K0auXgvu');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 4 Especies</h3>
+                        <div class="kit-price">$18</div>
+                        <p class="kit-description">Perfecto para iniciarte en el ritual andino. Cuatro especies esenciales del páramo.</p>
+                        <ul class="kit-features">
+                            <li>4 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita de madera artesanal</li>
+                            <li>Tarjeta con QR de rituales</li>
+                            <li>Etiquetas en papel reciclado</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%204%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://www.genspark.ai/api/files/s/hYTRLmNK');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 6 Especies</h3>
+                        <div class="kit-price">$26</div>
+                        <p class="kit-description">Amplía tu práctica ritual. Seis intenciones, seis momentos sagrados.</p>
+                        <ul class="kit-features">
+                            <li>6 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita de madera con gradita</li>
+                            <li>Tarjeta con QR de rituales</li>
+                            <li>Guía de preparación impresa</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%206%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="kit-card reveal">
+                    <div class="kit-image" style="background-image: url('https://www.genspark.ai/api/files/s/tbiDPdW3');"></div>
+                    <div class="kit-content">
+                        <h3>Kit 8 Especies</h3>
+                        <div class="kit-price">$34</div>
+                        <p class="kit-description">La experiencia completa. Ocho especies para cada día de la semana y el descanso sagrado.</p>
+                        <ul class="kit-features">
+                            <li>8 frascos de vidrio con corcho natural</li>
+                            <li>Infusor metálico profesional</li>
+                            <li>Jabita premium de madera doble</li>
+                            <li>Tarjeta QR + calendario ritual</li>
+                            <li>Mensaje personalizado incluido</li>
+                        </ul>
+                        <a href="https://wa.me/593999999999?text=Hola! Quiero%20el%20Kit%208%20Especies" class="kit-button">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/593999999999?text=Hola! Me%20interesa%20Andean%20Tea%20Time" id="whatsapp-float">
+        <span style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">💬</span>
+    </a>
+
+    <!-- FOOTER -->
+    <footer id="contacto" style="background: var(--carbon-oscuro); color: var(--marfil-claro); padding: 4rem 5%; text-align: center;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <img src="https://www.genspark.ai/api/files/s/E6LZJ3Mq" alt="Andean Tea Time" style="width: 120px; height: 120px; margin: 0 auto 2rem; opacity: 0.9;">
+
+            <div style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem;">
+                ANDEAN <span style="color: var(--kraft-natural);">TEA</span> TIME
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
+                <a href="#kits" style="color: var(--marfil-claro); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--kraft-natural)'" onmouseout="this.style.color='var(--marfil-claro)'">Kits</a>
+                <a href="https://wa.me/593999999999" style="color: var(--marfil-claro); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--kraft-natural)'" onmouseout="this.style.color='var(--marfil-claro)'">WhatsApp</a>
+                <a href="https://instagram.com/andeanteatime" style="color: var(--marfil-claro); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--kraft-natural)'" onmouseout="this.style.color='var(--marfil-claro)'">Instagram</a>
+            </div>
+
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(250, 248, 244, 0.2); font-size: 0.9rem; opacity: 0.7;">
+                <p>Andean Tea Time · Quito, Ecuador</p>
+                <p style="margin-top: 1rem;">Las infusiones de Andean Tea Time son de uso tradicional y no constituyen medicamentos.</p>
+                <p style="margin-top: 1rem; opacity: 0.5;">© 2024 Andean Tea Time. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // HIDE LOADING SPLASH
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('loading-splash');
+                splash.style.opacity = '0';
+                setTimeout(() => splash.remove(), 500);
+            }, 1200);
+        });
+
+        // NAVBAR SCROLL EFFECT
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // REVEAL ON SCROLL
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // SCROLL PROGRESS
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.pageYOffset / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // MOBILE MENU
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('nav-menu').classList.remove('active');
+        }
+
+        console.log('🌿 Andean Tea Time — RegálaTé un momento sagrado');
+    </script>
+
+</body>
+</html>
